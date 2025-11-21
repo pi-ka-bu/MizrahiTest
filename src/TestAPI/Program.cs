@@ -158,6 +158,24 @@ builder.Services.AddSingleton<IEventPublisher, KafkaEventPublisher>();
 // JWT Token Generator
 builder.Services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
 
+// Rate Limiter
+builder.Services.AddRateLimiter(options =>
+{
+    options.GlobalLimiter = PartitionedRateLimiter.Create<HttpContext, string>(httpContext =>
+        RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: httpContext.User.Identity?.Name
+                ?? httpContext.Request.Headers.Host.ToString(),
+            factory: partition => new FixedWindowRateLimiterOptions
+            {
+                AutoReplenishment = true,
+                PermitLimit = 10,
+                QueueLimit = 0,
+                Window = TimeSpan.FromMinutes(1),
+            }
+        )
+    );
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline
@@ -179,7 +197,7 @@ else
     app.UseExceptionHandler("/Error");
     app.UseHsts();
 }
-
+app.UseRateLimiter();
 app.UseHttpsRedirection();
 app.UseAuthentication();
 app.UseAuthorization();
