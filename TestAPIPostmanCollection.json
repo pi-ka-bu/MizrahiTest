@@ -1,0 +1,234 @@
+{
+  "info": {
+    "_postman_id": "2f29d38b-5a2a-4d8c-b506-66377f113312",
+    "name": "Test API Collection",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "16257403"
+  },
+  "item": [
+    {
+      "name": "Add",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{JWT}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-ArithmeticOp-ID",
+            "value": "{{$guid}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"add\",\n  \"x\": 10,\n  \"y\": 5\n}"
+        },
+        "url": {
+          "raw": "https://localhost:5001/api/math",
+          "protocol": "https",
+          "host": ["localhost"],
+          "port": "5001",
+          "path": ["api", "math", "calculate"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Subtract",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{JWT}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-ArithmeticOp-ID",
+            "value": "{{$guid}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"subtract\",\n  \"x\": 10,\n  \"y\": 5\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/math",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "math", "calculate"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Multiply",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{JWT}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-ArithmeticOp-ID",
+            "value": "{{$guid}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"multiply\",\n  \"x\": 10,\n  \"y\": 5\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/math",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "math", "calculate"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Divide",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{JWT}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-ArithmeticOp-ID",
+            "value": "{{$guid}}"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"divide\",\n  \"x\": 10,\n  \"y\": 2\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/math",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "math", "calculate"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Divide by Zero",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{JWT}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "X-ArithmeticOp-ID",
+            "value": "12345"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"divide\",\n  \"x\": 10,\n  \"y\": 0\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/math",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "math", "calculate"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Missing Header",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{JWT}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"add\",\n  \"x\": 10,\n  \"y\": 5\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/math",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api", "math", "calculate"]
+        }
+      },
+      "response": []
+    }
+  ]
+}

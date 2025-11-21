@@ -1,0 +1,215 @@
+{
+  "uuid": "testapi-mockoon",
+  "lastMigration": 27,
+  "name": "TestAPI Metadata Service",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "health-check",
+      "documentation": "Health check endpoint",
+      "method": "get",
+      "endpoint": "health",
+      "responses": [
+        {
+          "uuid": "health-response",
+          "body": "{\"status\":\"healthy\",\"service\":\"mockoon-metadata\"}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Health Check",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "add-metadata",
+      "documentation": "Metadata for addition operation",
+      "method": "get",
+      "endpoint": "api/meta/add",
+      "responses": [
+        {
+          "uuid": "add-response",
+          "body": "{\n  \"operation\": \"add\",\n  \"description\": \"Addition operation: combines two numbers by summing them together\",\n  \"formula\": \"result = x + y\",\n  \"examples\": [\n    {\"x\": 5, \"y\": 3, \"result\": 8},\n    {\"x\": 10, \"y\": 20, \"result\": 30}\n  ],\n  \"properties\": {\n    \"commutative\": true,\n    \"associative\": true,\n    \"identity\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Add Metadata",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "subtract-metadata",
+      "documentation": "Metadata for subtraction operation",
+      "method": "get",
+      "endpoint": "api/meta/subtract",
+      "responses": [
+        {
+          "uuid": "subtract-response",
+          "body": "{\n  \"operation\": \"subtract\",\n  \"description\": \"Subtraction operation: finds the difference between two numbers\",\n  \"formula\": \"result = x - y\",\n  \"examples\": [\n    {\"x\": 10, \"y\": 3, \"result\": 7},\n    {\"x\": 20, \"y\": 5, \"result\": 15}\n  ],\n  \"properties\": {\n    \"commutative\": false,\n    \"associative\": false,\n    \"identity\": 0\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Subtract Metadata",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "multiply-metadata",
+      "documentation": "Metadata for multiplication operation",
+      "method": "get",
+      "endpoint": "api/meta/multiply",
+      "responses": [
+        {
+          "uuid": "multiply-response",
+          "body": "{\n  \"operation\": \"multiply\",\n  \"description\": \"Multiplication operation: calculates the product of two numbers\",\n  \"formula\": \"result = x * y\",\n  \"examples\": [\n    {\"x\": 5, \"y\": 3, \"result\": 15},\n    {\"x\": 10, \"y\": 4, \"result\": 40}\n  ],\n  \"properties\": {\n    \"commutative\": true,\n    \"associative\": true,\n    \"identity\": 1\n  }\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Multiply Metadata",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    },
+    {
+      "uuid": "divide-metadata",
+      "documentation": "Metadata for division operation",
+      "method": "get",
+      "endpoint": "api/meta/divide",
+      "responses": [
+        {
+          "uuid": "divide-response",
+          "body": "{\n  \"operation\": \"divide\",\n  \"description\": \"Division operation: divides one number by another\",\n  \"formula\": \"result = x / y\",\n  \"examples\": [\n    {\"x\": 10, \"y\": 2, \"result\": 5},\n    {\"x\": 20, \"y\": 4, \"result\": 5}\n  ],\n  \"properties\": {\n    \"commutative\": false,\n    \"associative\": false,\n    \"identity\": 1\n  },\n  \"warnings\": [\"Division by zero is not allowed\"]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Divide Metadata",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "*"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": []
+}
