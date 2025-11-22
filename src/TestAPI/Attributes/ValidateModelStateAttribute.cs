@@ -11,7 +11,6 @@ namespace TestAPI.Attributes
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
-            // Per https://blog.markvincze.com/how-to-validate-action-parameters-with-dataannotation-attributes/
             var descriptor = context.ActionDescriptor as ControllerActionDescriptor;
             if (descriptor != null)
             {
