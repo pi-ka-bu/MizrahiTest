@@ -227,9 +227,13 @@ mockoon-data/
 .swagger-codegen-ignore
 build.sh
 build.bat
-IO.Swagger.csproj
-IO.Swagger.sln
 NuGet.Config
 PLANNING.md
 TEST-LOCALLY.md
+CLIENT-INTEGRATION.md
+
+# Generated client source folder (keep generated code in src/TestAPI.Client)
+csharp-client-generated/
+
+# Swagger spec (generated at runtime, can be regenerated)
 swagger-spec.json

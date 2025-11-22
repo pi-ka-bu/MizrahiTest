@@ -211,7 +211,7 @@ public class CalculatorApiTests : IClassFixture<CustomWebApplicationFactory>
         // Assert
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
         var responseContent = await response.Content.ReadAsStringAsync();
-        responseContent.Should().Contain("arithmeticOpId", StringComparison.OrdinalIgnoreCase);
+        responseContent.Should().ContainEquivalentOf("arithmeticOpId");
     }
 
     [Fact]

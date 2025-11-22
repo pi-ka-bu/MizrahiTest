@@ -47,6 +47,12 @@ A modern, production-ready ASP.NET Core 8.0 REST API for performing arithmetic o
 
 Development mode uses in-memory caching and mock services - no Redis/Kafka required:
 
+**Option 1: Using the solution file (recommended)**
+```bash
+dotnet run --project src/TestAPI/TestAPI.csproj
+```
+
+**Option 2: From the TestAPI directory**
 ```bash
 cd src/TestAPI
 dotnet run
@@ -57,6 +63,14 @@ The API will be available at:
 - HTTPS: https://localhost:5001
 - HTTP: http://localhost:5000
 - Swagger UI: https://localhost:5001/swagger
+
+### Building the Entire Solution
+
+To build all projects (API + Client + Tests):
+
+```bash
+dotnet build MizrahiTest.sln
+```
 
 ### Running with Docker Compose
 
@@ -76,7 +90,14 @@ Services:
 
 ## API Usage
 
-### 1. Generate JWT Token
+You can interact with the API in two ways:
+
+1. **Using HTTP/cURL** (shown below)
+2. **Using the C# Client Library** (see [CLIENT-INTEGRATION.md](CLIENT-INTEGRATION.md))
+
+### Using HTTP/cURL
+
+#### 1. Generate JWT Token
 
 ```bash
 curl -X POST http://localhost:5000/api/auth/token \
@@ -93,7 +114,7 @@ Response:
 }
 ```
 
-### 2. Perform Calculations
+#### 2. Perform Calculations
 
 ```bash
 curl -X POST http://localhost:5000/api/math \
@@ -133,6 +154,39 @@ Response:
 
 - `Authorization`: Bearer {JWT_TOKEN}
 - `X-ArithmeticOp-ID`: Any non-empty string for request correlation
+
+### Using the C# Client Library
+
+The project includes a type-safe C# client library for easy integration:
+
+```csharp
+using TestAPI.Client.Api;
+using TestAPI.Client.Client;
+using TestAPI.Client.Model;
+
+// Configure the client
+var config = new Configuration { BasePath = "http://localhost:5000" };
+config.ApiKey.Add("Authorization", "Bearer YOUR_JWT_TOKEN");
+
+// Create API instances
+var authApi = new AuthApi(config);
+var calculationApi = new CalculationApi(config);
+
+// Get token
+var tokenRequest = new TestAPIControllersTokenRequest { Username = "testuser" };
+authApi.ApiAuthTokenPost(tokenRequest);
+
+// Perform calculation
+var mathRequest = new TestAPIModelsMathRequest
+{
+    Operation = TestAPIModelsMathRequestOperationEnum.NUMBER_0, // Add
+    X = 10,
+    Y = 5
+};
+calculationApi.ApiMathPost(mathRequest, "operation-123");
+```
+
+For complete client library documentation, see [CLIENT-INTEGRATION.md](CLIENT-INTEGRATION.md)
 
 ## Configuration
 
@@ -179,6 +233,12 @@ Configuration is managed through `appsettings.json` and `appsettings.Development
 
 ### Run All Tests
 
+**Option 1: Using the solution file (recommended)**
+```bash
+dotnet test MizrahiTest.sln
+```
+
+**Option 2: From the test project directory**
 ```bash
 cd src/TestAPI.Tests
 dotnet test
@@ -187,7 +247,7 @@ dotnet test
 ### Run with Coverage
 
 ```bash
-dotnet test /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
+dotnet test MizrahiTest.sln /p:CollectCoverage=true /p:CoverletOutputFormat=opencover
 ```
 
 ### Test Structure
@@ -208,9 +268,10 @@ TestAPI.Tests/
 ## Project Structure
 
 ```
-CalculatorProject/
+MizrahiTest/
+├── MizrahiTest.sln           # Solution file (manages all projects)
 ├── src/
-│   ├── TestAPI/              # Main API project
+│   ├── TestAPI/              # Main API project (Server)
 │   │   ├── Controllers/      # API endpoints
 │   │   ├── Services/         # Business logic
 │   │   ├── Models/           # Request/response models
@@ -219,9 +280,14 @@ CalculatorProject/
 │   │   ├── Security/         # Authentication handlers
 │   │   ├── Configuration/    # Configuration classes
 │   │   └── Filters/          # Swagger filters
+│   ├── TestAPI.Client/       # C# Client Library (generated from Swagger)
+│   │   ├── Api/              # API client classes
+│   │   ├── Client/           # HTTP client infrastructure
+│   │   └── Model/            # Request/response models
 │   └── TestAPI.Tests/        # Test project
 ├── mockoon/                  # Mock service configs
 ├── docker-compose.yml        # Docker orchestration
+├── CLIENT-INTEGRATION.md     # Client library usage guide
 └── README.md                 # This file
 ```
 
